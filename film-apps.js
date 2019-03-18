@@ -18,7 +18,7 @@ $(document).ready(function () {
 
         $.ajax({
             dataType: 'json',
-            url: 'http://www.omdbapi.com/?apikey=df357c6e&s=' + searchingText,
+            url: 'https://www.omdbapi.com/?apikey=df357c6e&s=' + searchingText,
             success: function (data, textStatus, jqXHR) {
                 // When AJAX call is successfuly
                 console.log('AJAX call successful.');
