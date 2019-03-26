@@ -9,11 +9,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="film-apps.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 
 <body>
 
-    <div class="container-flex">
+    <div class="container-flex" id="vue">
         <div class="navbar">
             <div class="left-panel">
                 <div class="logo">
@@ -28,25 +29,40 @@
 
             <div class="search-panel">
                 <div class="search-area">
-                    <input type="text" id="search" placeholder="Search" aria-label="Search">
+                    <input type="text" v-model="searchquery" placeholder="Search" aria-label="Search">
                 </div>
                 <div class="search-button">
-                    <button type="button" id="btnSearch">Search</button>
+                    <button type="button" v-on:click="search">Search</button>
                 </div>
             </div>
         </div>
-        <div class="movies-panel">
+        <div class="movies-panel" v-if="isSuccess">
+            <div class="movie " v-for="item in movies" v-on:click="open(item.imdbID)">
+                <div class="movie-panel">
+                    <div class="movie-front"><img class="movie-img" v-bind:src="item.Poster">
+                    </div>
+                    <div class="movie-back">
 
-           
+                        <h1>{{item.Title}}</h1>
+                        <p>{{item.Year}}</p>
+                        <p></p>
+                        <div class="movie-star-panel">
+                            <div class="movie-star-rating"><img class="movie-star"
+                                    src="media/star-icon.png"><span></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
 
 
         </div>
-
-
-
-
-
+        <div v-if="!isSuccess">
+            <div class="jumbotron">
+                <h1>{{error}}</h1>
+            </div>
+        </div>
 
     </div>
     </div>
